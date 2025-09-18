@@ -1,3 +1,5 @@
+#Game/program when i had too much time
+
 # Coded functions - integerized
 def dec_to_bin(num):
     if num == 0:
