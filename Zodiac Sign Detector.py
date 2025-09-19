@@ -50,4 +50,5 @@ for sign_info in zodiac_signs:
 if user_zodiac != "Unknown":
     print(f"\nYour Zodiac sign is: {user_zodiac}")
 else:
+
     print("\nI couldn't determine your sign. Please check your date and try again.")
