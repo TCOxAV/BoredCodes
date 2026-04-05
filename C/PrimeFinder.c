@@ -1,6 +1,5 @@
 #include <stdio.h>
 int main(){
-printf("This was for my Lab Exam")
 int n,i,isprime=1;
 printf("Enter a number: ");
 scanf("%d",&n);
