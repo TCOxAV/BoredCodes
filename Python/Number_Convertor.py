@@ -3,9 +3,9 @@ def dec_to_bin(num):
     if num == 0:
         return "0"
     elif num != int(num):
-        return "Can't do float values!"
+        return "No floats!"
     elif num < 0:
-        return "No negative integers!"
+        return "No negatives!"
     bin_str = ""
     bin_num = num
     while bin_num > 0:
@@ -18,9 +18,9 @@ def dec_to_oct(num):
     if num == 0:
         return "0"
     elif num != int(num):
-        return "Can't do float values!"
+        return "No floats!"
     elif num < 0:
-        return "No negative integers!"
+        return "No negatives!"
     oct_str = ""
     num2 = num
     while num2 > 0:
@@ -31,10 +31,10 @@ def dec_to_oct(num):
 
 def bin_to_dec(num):
     if isinstance(num, (float, int)) and num < 0:
-        return "No negative integers!"
+        return "No negatives!"
     num1 = str(num)
     if any(c not in '01' for c in num1):
-        return "Invalid binary number! Please use only 0s and 1s."
+        return "Invalid binary! Use 0/1 only."
     dec_val = 0
     num1 = num1[::-1]
     for i in range(len(num1)):
@@ -45,7 +45,7 @@ def bin_to_dec(num):
 def oct_to_dec(num):
     str_num = str(num)
     if any(c not in '01234567' for c in str_num):
-        return "Invalid octal number! Please use digits 0-7."
+        return "Invalid octal! Use 0-7."
     dec_val = 0
     str_num = str_num[::-1]
     for i in range(len(str_num)):
@@ -56,7 +56,7 @@ def oct_to_dec(num):
 def hex_to_dec(num_str):
     num_str = str(num_str).upper()
     if any(c not in '0123456789ABCDEF' for c in num_str):
-        return "Invalid hexadecimal number! Please use 0-9 and A-F."
+        return "Invalid hex! Use 0-9,A-F."
     dec_val = 0
     num_str = num_str[::-1]
     for i in range(len(num_str)):
@@ -84,9 +84,9 @@ def dec_to_hex(num):
     if num == 0:
         return "0"
     elif num != int(num):
-        return "Can't do float values!"
+        return "No floats!"
     elif num < 0:
-        return "No negative integers!"
+        return "No negatives!"
     hex_str = ""
     num2 = num
     while num2 > 0:
@@ -127,68 +127,102 @@ def hex_to_oct(number):
 def hex_to_bin(number):
     return dec_to_bin(hex_to_dec(number))
 
+import random
+
+# Rage-bait responses
+roasts = [
+    "Seriously? 🤡", "Bruh... 💀", "You good? 🧠", "Try again, champ 🏆",
+    "That's embarrassing 📉", "Read the screen? 👓", "Are you trolling me? 🎣",
+    "My grandma codes better 👵", "Skill issue ngl 🔥", "Rage bait successful 😈",
+    "You did that on purpose? 🙄", "Oof size: LARGE 📦", "Brain.exe stopped 🖥️"
+]
+
+smart_roasts = [
+    "Wow. Just wow. 🤦", "Did you skip kindergarten? 🍼", "Tell me you're new without telling me 📢",
+    "Even a rock would get this right 🪨", "Let me dumb it down for you... 📉",
+    "I'm losing braincells rn 🧠💨", "You're why error handling exists 💀",
+    "This is why we can't have nice things 🔥"
+]
+
+def rage_bait():
+    return random.choice(roasts + smart_roasts)
 
 # User-driven system
 def get_base_choice(prompt, valid_options):
+    wrong_count = 0
     while True:
         choice = input(prompt).strip().lower()
         if choice in valid_options:
             return choice
         else:
-            print("Oops! That's not a valid option. Please try again.")
+            wrong_count += 1
+            if wrong_count >= 2:
+                print(f"{rage_bait()} That's not {valid_options}. C'mon man.")
+            else:
+                print(f"Nope. {rage_bait()} Pick {valid_options}.")
 
 
 def get_number_input(base_name):
+    wrong_count = 0
     while True:
-        user_input = input(f"Enter your {base_name} number: ").strip().upper()
+        user_input = input(f"Enter {base_name} number: ").strip().upper()
         if base_name == "binary":
             if all(c in '01' for c in user_input):
                 return int(user_input)
             else:
-                print("That's not a valid binary number. Please use only 0s and 1s.")
+                wrong_count += 1
+                if wrong_count >= 2:
+                    print(f"{rage_bait()} Binary is 0s and 1s. Not {user_input}. How hard is that?")
+                else:
+                    print(f"Uh oh. {rage_bait()} Use only 0s & 1s.")
         elif base_name == "octal":
             if all(c in '01234567' for c in user_input):
                 return int(user_input)
             else:
-                print("That's not a valid octal number. Please use digits from 0-7.")
+                wrong_count += 1
+                if wrong_count >= 2:
+                    print(f"{rage_bait()} OCTAL = digits 0-7. '{user_input}'?? You OK?")
+                else:
+                    print(f"Yikes. {rage_bait()} Use 0-7 only.")
         elif base_name == "decimal":
             if user_input.isdigit() or (user_input.startswith('-') and user_input[1:].isdigit()):
                 return int(user_input)
             else:
-                print("That's not a valid decimal number. Please use only digits.")
+                wrong_count += 1
+                if wrong_count >= 2:
+                    print(f"{rage_bait()} Decimal is just numbers. '{user_input}' ain't it.")
+                else:
+                    print(f"Lmao. {rage_bait()} Numbers only.")
         elif base_name == "hexadecimal":
             if all(c in '0123456789ABCDEF' for c in user_input):
                 return user_input
             else:
-                print("That's not a valid hexadecimal number. Please use digits 0-9 and letters A-F.")
+                wrong_count += 1
+                if wrong_count >= 2:
+                    print(f"{rage_bait()} Hex is 0-9 and A-F. '{user_input}'? Nice try.")
+                else:
+                    print(f"Bro... {rage_bait()} Use 0-9 & A-F.")
 
 
 # Main program loop
-print("✨ Welcome to the Number Base Converter! ✨")
-print("I'm here to help you switch between different number systems.")
+print("✨ Base Converter (Don't mess up) ✨")
+print("⚠️ Warning: Wrong answers = public embarrassment ⚠️")
 
 while True:
-    print("\n--- Let's Get Started! ---")
-    print("Which base do you want to start from?")
-    print("1: Binary")
-    print("2: Octal")
-    print("3: Decimal")
-    print("4: Hexadecimal")
-    from_base_choice = get_base_choice("Enter your choice (1-4): ", ['1', '2', '3', '4'])
+    print("\n--- Pick a base (carefully) ---")
+    print("1: Bin  2: Oct  3: Dec  4: Hex")
+    from_base_choice = get_base_choice("Choice (1-4): ", ['1', '2', '3', '4'])
 
-    print("\nAnd what base do you want to convert to?")
-    print("1: Binary")
-    print("2: Octal")
-    print("3: Decimal")
-    print("4: Hexadecimal")
-    to_base_choice = get_base_choice("Enter your choice (1-4): ", ['1', '2', '3', '4'])
+    print("\n--- Convert to ---")
+    print("1: Bin  2: Oct  3: Dec  4: Hex")
+    to_base_choice = get_base_choice("Choice (1-4): ", ['1', '2', '3', '4'])
 
     bases = {'1': 'binary', '2': 'octal', '3': 'decimal', '4': 'hexadecimal'}
     from_base_name = bases[from_base_choice]
     to_base_name = bases[to_base_choice]
 
     if from_base_choice == to_base_choice:
-        print("Heh, you can't convert a number to itself! Let's try again.")
+        print(f"{rage_bait()} Same base? Really? Go touch grass. 🌿")
         continue
 
     number = get_number_input(from_base_name)
@@ -223,9 +257,13 @@ while True:
         elif to_base_name == "decimal":
             result = hex_to_dec(number)
 
-    print(f"\n🚀 The result is: **{result}**!")
+    # Check if result is an error message
+    if isinstance(result, str) and result.startswith(("Invalid", "No", "Use")):
+        print(f"\n❌ {result} {rage_bait()}")
+    else:
+        print(f"\n✅ Result: {result} (Don't act surprised you got it right)")
 
-    play_again = input("\nWant to do another conversion? (yes/no): ").strip().lower()
-    if play_again != "yes":
-        print("Thanks for using the converter! See you next time! 👋")
+    play_again = input("\nAgain? (y/n): ").strip().lower()
+    if play_again not in ['y', 'yes']:
+        print(f"Finally leaving? {rage_bait()} Bye.")
         break
